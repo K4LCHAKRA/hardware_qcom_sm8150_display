@@ -13,6 +13,10 @@ cc_library_shared {
     cflags: [
         "-DLOG_TAG=\"qdgralloc\"",
         "-Wno-sign-conversion",
+        "-DUSE_BIONIC_SCHED", // Prefer Bionic's sched.h over kernel headers
+        "-Wall",
+        "-Werror",
+        "-std=c++11", // Align with libdrmutils if possible, or verify if gnu++20 is required
     ],
     shared_libs: [
         "android.hardware.graphics.mapper@2.0",
@@ -26,10 +30,15 @@ cc_library_shared {
     ],
     header_libs: [
         "display_headers",
-        "device_kernel_headers",
+        // Remove device_kernel_headers to avoid conflicts
+        // "device_kernel_headers",
     ],
-    export_header_lib_headers: [
-        "device_kernel_headers",
+    local_include_dirs: [
+        ".", // Keep local includes
     ],
     export_include_dirs: ["."],
+    // Optionally, keep specific kernel headers if needed
+    // local_include_dirs: [
+    //     "path/to/specific/kernel/headers", // Replace with targeted path if required
+    // ],
 }
