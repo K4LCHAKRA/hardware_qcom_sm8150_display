@@ -24,13 +24,6 @@ cc_library_shared {
         "-DUSE_BIONIC_SCHED", // Prefer Bionic's sched.h over kernel headers
         "-std=c++11",
     ],
-    local_include_dirs: [
-        // Add specific include paths if needed instead of broad kernel headers
-        "include",
-    ],
-    export_include_dirs: [
-        "include",
-    ],
     srcs: [
         "drm_master.cpp",
         "drm_res_mgr.cpp",
